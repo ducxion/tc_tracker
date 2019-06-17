@@ -1,0 +1,65 @@
+#MAIN
+---
+MODE: analysis
+START: 2017-09-01 00:00
+STOP: 2017-10-01 00:00
+DAYS: None
+
+#REGION
+---
+NAME: se_asia
+PATH: C:\Coding\Projects\tc-tracker\analysis\
+BBOX: [90, 0, 160, 40]
+DEGS: 0.5
+TS: 10800
+
+#INTENSITY
+---
+INTENSITY_UNIT: kts
+INTENSITY_NAMES: ['tropical depression', 'tropical storm', 'typhoon', 'super typhoon']
+INTENSITY_VALUES: [0, 34, 66, 130]
+
+#RULES
+#Because YAML can't import and parse mathematical operators, and the bad idea of using
+#eval for any input scripts, the user will have to enter in the appropriate values
+#themselves for the rules. if RULES_DEFAULT is set to true, then the following
+#rules can be safely ignored. 
+---
+RULES_DEFAULT: True
+pressure_min: 101500
+pressure_neighbourhood: # 7.5 / DEGS
+vmax_radius: #2 / DEGS
+vmax_thresh: #16.5
+vort_radius: #2 / DEGS
+vort_thresh: #0.00001
+core_inner: #1 / DEGS
+core_outer: #3.5 / DEGS
+core_rule: None
+duration_analysis: #24 / (TS_A / 3600)
+duration_ensemble: #24 / (TS_E / 3600)
+cyclosis_analysis: #24 / (TS_A / 3600) * 2
+cyclosis_ensemble: #24 / (TS_E / 3600) * 2
+update_analysis: #2 / DEGS
+update_ensemble: #4 / DEGS 
+exclude_extratropical: #True
+
+#NETCDF FORMAT
+#FILE NAMES
+---
+PSL: 'PRMSL.nc'
+U10M: 'UGRD_10M.nc'
+V10M: 'VGRD_10M.nc'
+U850: 'UGRD.nc'
+V850: 'VGRD.nc'
+TMP: 'TMP.nc'
+---
+#VARAIBLE NAMES
+PSL: 'PRMSL_10M'
+U10M: 'UGRD_10M'
+V10M: 'VGRD_10M'
+U850: 'UGRD'
+V850: 'VGRD'
+TMP: 'TMP'
+
+
+

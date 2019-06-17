@@ -1,0 +1,66 @@
+#MAIN
+---
+MODE: ensemble
+START: 2017-10-16 00:00
+STOP: 
+DAYS: 10
+ENSEMBLES: 40
+
+#REGION
+---
+NAME: se_asia
+PATH: C:\Coding\Projects\tc-tracker\ensemble\lan\
+BBOX: [90, 0, 160, 40]
+DEGS: 0.5
+TS: 21600
+
+#INTENSITY
+---
+INTENSITY_UNIT: kts
+INTENSITY_NAMES: ['tropical depression', 'tropical storm', 'typhoon', 'super typhoon']
+INTENSITY_VALUES: [0, 34, 66, 130]
+
+#RULES
+#Because YAML can't import and parse mathematical operators, and the bad idea of using
+#eval for any input scripts, the user will have to enter in the appropriate values
+#themselves for the rules. if RULES_DEFAULT is set to true, then the following
+#rules can be safely ignored. 
+---
+RULES_DEFAULT: True
+pressure_min: 101500
+pressure_neighbourhood: # 7.5 / DEGS
+vmax_radius: #2 / DEGS
+vmax_thresh: #16.5
+vort_radius: #2 / DEGS
+vort_thresh: #0.00001
+core_inner: #1 / DEGS
+core_outer: #3.5 / DEGS
+core_rule: None
+duration_analysis: #24 / (TS_A / 3600)
+duration_ensemble: #24 / (TS_E / 3600)
+cyclosis_analysis: #24 / (TS_A / 3600) * 2
+cyclosis_ensemble: #24 / (TS_E / 3600) * 2
+update_analysis: #2 / DEGS
+update_ensemble: #4 / DEGS 
+exclude_extratropical: #True
+
+#NETCDF FORMAT
+#FILE NAMES
+---
+PSL: '_msl.nc'
+U10M: '_10u.nc'
+V10M: '_10v.nc'
+U850: '_850u.nc'
+V850: '_850v.nc'
+TMP: '_TMP.nc'
+---
+#VARAIBLE NAMES
+PSL: 'msl'
+U10M: '10u'
+V10M: '10v'
+U850: '10u'
+V850: '10v'
+TMP: 'TMP'
+
+
+
